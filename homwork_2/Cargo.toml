@@ -7,10 +7,10 @@ edition = "2021"
 
 [[bin]]
 name = "task1"
-path = "homwork_2/src/task1.rs"
+path = "src/task1.rs"
 
 [[bin]]
 name = "task2"
-path = "homwork_2/src/task2.rs"
+path = "src/task2.rs"
 
 [dependencies]
