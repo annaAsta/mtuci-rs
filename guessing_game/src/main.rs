@@ -1,3 +1,7 @@
+# внешний ящик rand;
+// импортируйте часто используемые элементы из prelude:
+используйте rand::prelude::*;
+
 use std::io;
 use rand;
 use std::cmp::Ordering;
@@ -5,7 +9,7 @@ use std::cmp::Ordering;
 fn main() {
     println!("Guess the number!");
 
-    let rand  = rand::thread_rng().gen_range(1..=100);
+    let secret_number = rand::thread_rng().gen_range(1..=100);
 
     // println!("The secret number is: {secret_number}");
 
