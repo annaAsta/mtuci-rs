@@ -1,7 +1,3 @@
-::внешний ящик: rand;
-// импортируйте часто используемые элементы из prelude:
-используйте rand::prelude::*;
-
 use std::io;
 use rand;
 use std::cmp::Ordering;
