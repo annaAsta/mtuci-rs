@@ -1,15 +1,8 @@
-[[bin]]
-name = "loops"
-path = "src/loops.rs"
+[package]
+name = "untitled"
+version = "0.1.0"
+edition = "2021"
 
-[[bin]]
-name = "functions"
-path = "src/functions.rs"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[[bin]]
-name = "branches"
-path = "src/branches.rs"
-
-[[bin]]
-name = "variables"
-path = "src/variables.rs"
+[dependencies]
