@@ -49,7 +49,7 @@ fn main() {
     // println!("{}", r3);
 
 
-    let reference_to_nothing = dangle();
+    let _reference_to_nothing = dangle();
 }
 
 fn dangle() -> String { // dangle returns a reference to a String
