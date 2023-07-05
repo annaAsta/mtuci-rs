@@ -20,12 +20,16 @@ fn find_term(search_term: &str, quote: &str) -> String {
     let mut line_number = 0;
     for line in quote.lines() {
         line_number += 1;
-        if line.contains(search_term) {
-            return format!("{}: {}", line_number, line.trim());
+        let words: Vec<&str> = line.split_whitespace().collect();
+        for word in words {
+            if word == search_term {
+                return format!("{}: {}", line_number, line.trim());
+            }
         }
     }
     String::from("Word not found.")
 }
+
 //----> TESTS
 #[cfg(test)]
 mod tests {
