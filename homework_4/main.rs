@@ -1,75 +1,57 @@
-struct MyVector<T> {
-    data: [Option<T>; 16],
-    length: usize,
-    capacity: usize,
+struct Vector<T> {
+    data: Vec<T>,
 }
 
-impl<T> MyVector<T> {
+impl<T> Vector<T> {
     fn new() -> Self {
-        Self {
-            data: [None; 16],
-            length: 0,
-            capacity: 16,
-        }
+        Vector { data: Vec::new() }
     }
 
     fn with_capacity(capacity: usize) -> Self {
-        Self {
-            data: [None; capacity],
-            length: 0,
-            capacity,
+        Vector {
+            data: Vec::with_capacity(capacity),
         }
     }
 
-    fn push(&mut self, element: T) {
-        if self.length == self.capacity {
-            self.resize(self.capacity * 2);
-        }
-        self.data[self.length] = Some(element);
-        self.length += 1;
+    fn push(&mut self, value: T) {
+        self.data.push(value);
     }
 
     fn pop(&mut self) -> Option<T> {
-        if self.length == 0 {
-            return None;
-        }
-        let index = self.length - 1;
-        let element = self.data[index].take();
-        self.length -= 1;
-        if self.length < self.capacity / 4 {
-            self.resize(self.capacity / 2);
-        }
-        element
+        self.data.pop()
     }
 
     fn remove(&mut self, index: usize) -> Option<T> {
-        if index >= self.length {
-            return None;
+        if index < self.data.len() {
+            Some(self.data.remove(index))
+        } else {
+            None
         }
-        let element = self.data[index].take();
-        for i in index..self.length - 1 {
-            self.data[i] = self.data[i + 1].take();
-        }
-        self.length -= 1;
-        if self.length < self.capacity / 4 {
-            self.resize(self.capacity / 2);
-        }
-        element
     }
 
     fn get(&self, index: usize) -> Option<&T> {
-        if index >= self.length {
-            return None;
-        }
-        self.data[index].as_ref()
+        self.data.get(index)
     }
 
-    fn resize(&mut self, new_capacity: usize) {
-        let mut new_data = [None; 16];
-        for i in 0..self.length {
-            new_data[i] = self.data[i].take();
-        }
-        self.data = new_data;
-        self.capacity = new_capacity;
+    fn resize(&mut self, new_size: usize) {
+        self.data.resize(new_size, Default::default());
+    }
+}
+fn main() {
+    let mut vec = Vector::new();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+
+    println!("{:?}", vec.pop()); // Выводит: Some(3)
+
+    println!("{:?}", vec.remove(0)); // Выводит: Some(1)
+
+    println!("{:?}", vec.get(0)); // Выводит: Some(&2)
+
+    vec.resize(5);
+
+    for i in 0..5 {
+        println!("{:?}", vec.get(i)); // Выводит: Some(&2), None, None, None, None
     }
 }
