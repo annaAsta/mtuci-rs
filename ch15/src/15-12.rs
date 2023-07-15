@@ -22,5 +22,5 @@ fn hello(name: &str) {
 
 fn main() {
     let m = MyBox::new(String::from("Rust"));
-    hello(&(*m)[..]);
+    hello(&m);
 }
